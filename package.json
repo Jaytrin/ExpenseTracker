@@ -1,0 +1,26 @@
+{
+  "name": "expensetracker",
+  "version": "1.0.0",
+  "description": "expense tracking",
+  "main": "webserver.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "mysqli": "^3.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node webserver.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaytrin/ExpenseTracker.git"
+  },
+  "author": "Jaytrin Apinchapong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaytrin/ExpenseTracker/issues"
+  },
+  "homepage": "https://github.com/Jaytrin/ExpenseTracker"
+}
