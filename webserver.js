@@ -6,7 +6,11 @@ const db = mysql.createConnection(credentials);
 
 server.use(express.static(__dirname + '/html'));
 
-
+db.connect((err) => {
+    if(err){
+        console.log('connection to database failed');
+    } else {console.log('connected to database')
+}});
 
 server.get('/test', function(request, response){
     db.connect(function(){
