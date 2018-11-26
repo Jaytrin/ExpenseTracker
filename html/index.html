@@ -10,15 +10,19 @@
     <script>
     
     function login(){
-        var itemName = $("input[name=Item]").val();
-        var vendorName = $("input[name=Vendor]").val();
-        console.log(vendorName);
+        var itemName = $("input[name=itemName]").val();
+        var itemPrice = $("input[name=itemPrice]").val();
+        var vendorName = $("input[name=vendorName]").val();
+        var itemCategory = $("input[name=itemCategory]").val();
+
         $.ajax({
-            url: '/login',
+            url: '/submitExpense',
             cache: false,
             data: {
                 item: itemName,
-                vendor: vendorName
+                price: itemPrice,
+                vendor: vendorName,
+                category: itemCategory
             },
             method: 'post',
             dataType: 'json'
@@ -44,26 +48,40 @@
     </div>
     <div class="student-add-form col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-right">
         <h4>Add Expense</h4>
+
+<!-- Item Form Button-->
+        <!-- Item Name-->
         <div class="form-group input-group">
             <span class = "input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
             </span>
-            <input type="text" class="form-control" name="Item" id="Item" placeholder="Item">
+            <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Item Name">
         </div>
+        <!-- Item Price-->
+        <div class="form-group input-group">
+            <span class = "input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+            </span>
+            <input type="text" class="form-control" name="itemPrice" id="itemPrice" placeholder="Item Price">
+        </div>
+
+<!-- Merchant Form Button-->
         <div class="form-group input-group">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-list-alt"></span>
             </span>
-            <input type="text" class="form-control" name="Vendor" id="Vendor"
-                   placeholder="Vendor">
+            <input type="text" class="form-control" name="vendorName" id="vendorName"
+                   placeholder="Vendor Name">
         </div>
+<!-- Item Category Form Button-->
         <div class="form-group input-group">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-education"></span>
             </span>
-            <input type="text" class="form-control" name="Expense" id="Expense"
-                   placeholder="Expense">
+            <input type="text" class="form-control" name="itemCategory" id="itemCategory"
+                   placeholder="Item Category">
         </div>
+<!-- Form Submit Buttons-->      
         <button type="button" class="btn btn-success" onclick="login()">Add</button>
         <button type="button" class="btn btn-default" onclick="">Cancel</button>
         <button type="button" class="btn btn-primary" onclick="">Get Data</button>
