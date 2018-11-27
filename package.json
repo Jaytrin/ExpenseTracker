@@ -2,7 +2,7 @@
   "name": "expensetracker",
   "version": "1.0.0",
   "description": "expense tracking",
-  "main": "webserver.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.16.4",
     "mysql": "^2.16.0"
@@ -10,7 +10,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node webserver.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
