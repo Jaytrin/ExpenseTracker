@@ -44,6 +44,7 @@ database.connect((err) => {
 // });
 
 require('./trackexpense')(server,database);
+require('./users')(server,database);
 
 console.log('server running');
 
