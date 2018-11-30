@@ -9,7 +9,7 @@
 
     <script>
     
-    function login(){
+    function addExpense(){
         var itemName = $("input[name=itemName]").val();
         var itemPrice = $("input[name=itemPrice]").val();
         var vendorName = $("input[name=vendorName]").val();
@@ -26,9 +26,27 @@
             },
             method: 'post',
             dataType: 'json'
+        })}
 
-        })
-    }
+    // function signUp(){
+    //     var username = $("input[name=itemName]").val();
+    //     var email = $("input[name=itemPrice]").val();
+    //     var fname = $("input[name=vendorName]").val();
+    //     var lname = $("input[name=itemCategory]").val();
+    //     var password = $("input[name=itemCategory]").val();
+
+    //     $.ajax({
+    //         url: '/submitExpense',
+    //         cache: false,
+    //         data: {
+    //             item: itemName,
+    //             price: itemPrice,
+    //             vendor: vendorName,
+    //             category: itemCategory
+    //         },
+    //         method: 'post',
+    //         dataType: 'json'
+    //     })}
     
     </script>
 
@@ -82,7 +100,7 @@
                    placeholder="Item Category">
         </div>
 <!-- Form Submit Buttons-->      
-        <button type="button" class="btn btn-success" onclick="login()">Add</button>
+        <button type="button" class="btn btn-success" onclick="addExpense()">Add</button>
         <button type="button" class="btn btn-default" onclick="">Cancel</button>
         <button type="button" class="btn btn-primary" onclick="">Get Data</button>
     </div>
