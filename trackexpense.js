@@ -67,5 +67,31 @@ module.exports = (app, database) => {
                      } else {console.log('Category failed to be inputted.');
         }});}})
 
+    //Obtain item category information
+    SELECT i.ID, c.ID FROM item AS i, category AS c WHERE i.name = item AND i.unit_price = price
+
+
+
+    //Create transaction
+     //Build query for category
+    //  const transactionQuery = "INSERT INTO transaction SET ID = null, user_id = ?";
+    //  const transactionInserts = [category];
+    //  const transactionSql = mysql.format(categoryQuery, categoryInserts);
+
+    //  //Build query to check if category already within database
+    //  const categoryCheckQuery = "SELECT ID FROM category WHERE name = ?";
+    //  const categoryCheckSql = mysql.format(categoryCheckQuery, categoryInserts);
+
+    //     //Run query to check for category and insert if not in database
+    //     database.query(categoryCheckSql, (error, data, fields) => {
+    //      if(!data.length){
+    //          database.query(categorySql, (error, data, fields)=>{
+    //              if(!error){
+    //                  console.log('Category successfully inputted.');
+    //               } else {console.log('Category failed to be inputted.');
+    //  }});}})
+
+
+
     });
 };

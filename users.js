@@ -2,7 +2,6 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-
 module.exports = (app, database) => {
 
     console.log('connected to users');
@@ -16,9 +15,6 @@ module.exports = (app, database) => {
         const lname = request.body.lname;
         const password = request.body.password;
         
-
-
-
     //User Creation
         //Build query for item
         const userSubmitQuery = "INSERT INTO user SET ID = null, username = ?, email = ?, fname = ?, lname = ?";
