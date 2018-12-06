@@ -64,13 +64,30 @@ module.exports = (app, database) => {
                 database.query(categorySql, (error, data, fields)=>{
                     if(!error){
                         console.log('Category successfully inputted.');
+                            //Obtain item information
+                            const itemIDQuery = "SELECT ID FROM item AS i WHERE i.name = ? AND i.unit_price = ?";
+                            const itemInsert = [item, price];
+                            const itemIDSQL = mysql.format(itemIDQuery, itemInsert);
+                            database.query(itemIDSQL, (error, data, fields) => {
+                                if(!error && data.length){
+                                    console.log('Item Working');
+                                    const itemID = data[0]['ID']; 
+                                    console.log('ItemID: ', itemID);
+                                } else {console.log('Could not find item')}
+                            })
+
+                            //Obtain category information
+                            const categoryIDQuery = "SELECT ID FROM category AS c WHERE c.name = ?";
+                            const categoryIDSQL = mysql.format(categoryIDQuery, category);
+                            database.query(categoryIDSQL, (error, data, fields) => {
+                                if(!error && data.length){
+                                    console.log('Category Working');
+                                    const categoryID = data[0]['ID'];
+                                    console.log('Category: ', categoryID);
+                                } else {console.log('Could not find category')}
+                            })
                      } else {console.log('Category failed to be inputted.');
         }});}})
-
-    //Obtain item category information
-    SELECT i.ID, c.ID FROM item AS i, category AS c WHERE i.name = item AND i.unit_price = price
-
-
 
     //Create transaction
      //Build query for category
