@@ -73,6 +73,20 @@ module.exports = (app, database) => {
 
     });
 
-
-
-};
+    app.post('/login', (request, response)=>{
+        response.send('Login Attempted');
+        const output={
+            success: false,
+            loggedin: false
+        }
+        db.connect(()=>{
+            const loginQuery = `SELECT ID, username, email, fname, lname, status 
+                           FROM users AS u
+                           JOIN password AS p
+                           ON u.ID = p.user_id 
+                           WHERE u.username = ? AND p.hash = ? AND status = ?`;
+            const loginInserts = [username, password, 'active'];
+            const loginSQL = mysql.format(loginQuery, loginInserts);
+            console.log(query);
+        })
+});
