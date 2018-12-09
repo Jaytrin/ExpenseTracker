@@ -79,14 +79,35 @@ module.exports = (app, database) => {
             success: false,
             loggedin: false
         }
-        db.connect(()=>{
-            const loginQuery = `SELECT ID, username, email, fname, lname, status 
-                           FROM users AS u
+        const username = request.body.username;
+        const password = request.body.password;
+
+        //Checks inputted password against database and returns true of false if match
+        bcrypt.genSalt(saltRounds, function(error, salt) {
+            bcrypt.hash(password, salt, function(error, hash) {
+                bcrypt.compare(password, hash, function(error, response) {
+                    if(!error && response == true){
+                        const match = true;
+                        console.log('Match: ', match);
+                    } else {const match = false;
+                        console.log('Match: ', match);}    
+                });});});
+        
+        database.connect(()=>{
+            const loginQuery = `SELECT u.ID, u.username, u.email, u.fname, u.lname, u.status 
+                           FROM user AS u
                            JOIN password AS p
                            ON u.ID = p.user_id 
                            WHERE u.username = ? AND p.hash = ? AND status = ?`;
             const loginInserts = [username, password, 'active'];
             const loginSQL = mysql.format(loginQuery, loginInserts);
-            console.log(query);
+            database.query(loginSQL, (error, data, fields) => {
+                if(!error){
+                    console.log(data[0]);
+                } else {
+                    console.log('Error running query');
+                }
+            })
         })
 });
+}
