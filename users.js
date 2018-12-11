@@ -8,8 +8,12 @@ const sessionParams = {
     saveUninitialized: true, 
     cookie: {secure: false}
 };
+const sessionExec = session(sessionParams);
+
 
 module.exports = (app, database) => {
+
+    server.use(sessionExec);
 
     console.log('connected to users');
 
