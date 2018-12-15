@@ -58,6 +58,8 @@ module.exports = (app, database) => {
         const categoryCheckQuery = "SELECT ID FROM category WHERE name = ?";
         const categoryCheckSql = mysql.format(categoryCheckQuery, categoryInserts);
 
+        const itemCategoryID = {itemID: null, categoryID: null};
+
            //Run query to check for category and insert if not in database
            database.query(categoryCheckSql, (error, data, fields) => {
             if(!data.length){
@@ -72,6 +74,7 @@ module.exports = (app, database) => {
                                 if(!error && data.length){
                                     console.log('Item Working');
                                     const itemID = data[0]['ID']; 
+                                    itemCategoryID['itemID'] = itemID;
                                     console.log('ItemID: ', itemID);
                                 } else {console.log('Could not find item')}
                             })
@@ -83,9 +86,28 @@ module.exports = (app, database) => {
                                 if(!error && data.length){
                                     console.log('Category Working');
                                     const categoryID = data[0]['ID'];
-                                    console.log('Category: ', categoryID);
+                                    itemCategoryID['categoryID'] = categoryID;
+                                    
+                            //Populate item_category table---
+                            if(itemCategoryID['itemID'] && itemCategoryID['categoryID']){
+                                const itemCategoryQuery = "INSERT INTO item_category SET ID = null, item_id = ?, category_id";
+                                const itemCategoryInserts = [itemCategoryID['itemID'], itemCategoryID['categoryID']];
+                                const itemCategorySQL = mysql.format(itemCategoryQuery, itemCategoryInserts);
+                                database.query(itemCategorySQL, (error, data, fields) => {
+                                    if(!error){
+                                        console.log('item_category table successfully populated');
+                                    } else {
+                                        console.log('Failed to populate item_category table');
+                                    }
+                                });
+                            }
                                 } else {console.log('Could not find category')}
                             })
+                            console.log(itemCategoryID);
+
+                            
+
+
                      } else {console.log('Category failed to be inputted.');
         }});}})
 
