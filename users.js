@@ -2,19 +2,11 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const session = require('express-session');
-const sessionParams = {
-    secret: 'gottacatchemall',
-    resave: false, 
-    saveUninitialized: true, 
-    cookie: {secure: false}
-};
-const sessionExec = session(sessionParams);
+
+
 
 
 module.exports = (app, database) => {
-
-    server.use(sessionExec);
-
     console.log('connected to users');
 
     app.post('/signUp', (request, response)=>{
@@ -86,6 +78,16 @@ module.exports = (app, database) => {
 
     app.post('/login', (request, response)=>{
         response.send('Login Attempted');
+
+        const sessionParams = {
+            secret: 'gottacatchemall',
+            resave: false, 
+            saveUninitialized: true, 
+            cookie: {secure: false}
+        };
+        const sessionExec = session(sessionParams);
+        app.use(sessionExec);
+    
         const output={
             success: false,
             loggedin: false
@@ -119,6 +121,8 @@ module.exports = (app, database) => {
                     output['success'] = true;
                     output['loggedin'] = true;
                     console.log('Output: ', output);
+                    request.session = data[0];
+                    console.log('session data: ', request.session);
                 } else {
                     console.log('Error running query');
                 }
@@ -133,3 +137,4 @@ app.post('/logout', (request, response)=>{
         loggedin: null
     }
 });
+}
