@@ -3,9 +3,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const session = require('express-session');
 
-
-
-
 module.exports = (app, database) => {
     console.log('connected to users');
 
