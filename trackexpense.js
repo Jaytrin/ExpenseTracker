@@ -94,6 +94,7 @@ module.exports = (app, database) => {
                                 const itemCategoryInserts = [itemCategoryID['itemID'], itemCategoryID['categoryID']];
                                 const itemCategorySQL = mysql.format(itemCategoryQuery, itemCategoryInserts);
                                 database.query(itemCategorySQL, (error, data, fields) => {
+                                    console.log('error',error);
                                     if(!error){
                                         console.log('item_category table successfully populated');
                                     } else {
