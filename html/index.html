@@ -3,30 +3,30 @@
 <head>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- <script src="script.js"></script> -->
     <meta name="viewport" content="initial-scale=1, user-scalable=no">
 
     <script>
     
-    function addExpense(){
-        var itemName = $("input[name=itemName]").val();
-        var itemPrice = $("input[name=itemPrice]").val();
-        var vendorName = $("input[name=vendorName]").val();
-        var itemCategory = $("input[name=itemCategory]").val();
+    // function addExpense(){
+    //     var itemName = $("input[name=itemName]").val();
+    //     var itemPrice = $("input[name=itemPrice]").val();
+    //     var vendorName = $("input[name=vendorName]").val();
+    //     var itemCategory = $("input[name=itemCategory]").val();
 
-        $.ajax({
-            url: '/submitExpense',
-            cache: false,
-            data: {
-                item: itemName,
-                price: itemPrice,
-                vendor: vendorName,
-                category: itemCategory
-            },
-            method: 'post',
-            dataType: 'json'
-        })}
+    //     $.ajax({
+    //         url: '/submitExpense',
+    //         cache: false,
+    //         data: {
+    //             item: itemName,
+    //             price: itemPrice,
+    //             vendor: vendorName,
+    //             category: itemCategory
+    //         },
+    //         method: 'post',
+    //         dataType: 'json'
+    //     })}
 
     // function signUp(){
     //     var username = $("input[name=itemName]").val();
@@ -53,54 +53,116 @@
 
 </head>
 <body>
-<div class="container-fluid">
+    <!-- Navigation Bar -->
+    <div class="container">    
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand mb-0 h1" href="#">Expense Tracker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!-- only show this element when the isnt on mobile -->
-        <h1 class="hidden-xs hidden-sm page-header">Expense Tracker
+        <!-- <h1 class="hidden-xs hidden-sm page-header">Expense Tracker
             <small class="pull-right">Total Expense : <span class="avgGrade label label-default"></span></small>
-        </h1>
+        </h1> -->
         <!-- only show this element when the user gets to a mobile version -->
-        <h3 class="hidden-md hidden-lg page-header col-xs-12">Expense Tracker
+        <!-- <h3 class="hidden-md hidden-lg page-header col-xs-12">Expense Tracker
             <small class="pull-right">Total Expense : <span class="avgGrade label label-default"></span></small>
         </h3>
     </div>
     <div class="student-add-form col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-right">
-        <h4>Add Expense</h4>
+        <h4>Add Expense</h4> -->
 
 <!-- Item Form Button-->
         <!-- Item Name-->
-        <div class="form-group input-group">
+        <!-- <div class="form-group input-group">
             <span class = "input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
             </span>
             <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Item Name">
-        </div>
+        </div> -->
         <!-- Item Price-->
-        <div class="form-group input-group">
+        <!-- <div class="form-group input-group">
             <span class = "input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
             </span>
             <input type="text" class="form-control" name="itemPrice" id="itemPrice" placeholder="Item Price">
-        </div>
+        </div> -->
 
 <!-- Merchant Form Button-->
-        <div class="form-group input-group">
+        <!-- <div class="form-group input-group">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-list-alt"></span>
             </span>
             <input type="text" class="form-control" name="vendorName" id="vendorName"
                    placeholder="Vendor Name">
-        </div>
+        </div> -->
 <!-- Item Category Form Button-->
-        <div class="form-group input-group">
+        <!-- <div class="form-group input-group">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-education"></span>
             </span>
             <input type="text" class="form-control" name="itemCategory" id="itemCategory"
                    placeholder="Item Category">
-        </div>
+        </div> -->
 <!-- Form Submit Buttons-->      
-        <button type="button" class="btn btn-success" onclick="addExpense()">Add</button>
+        <!-- <button type="button" class="btn btn-success" onclick="addExpense()">Add</button>
         <button type="button" class="btn btn-default" onclick="">Cancel</button>
         <button type="button" class="btn btn-primary" onclick="">Get Data</button>
     </div>
@@ -120,6 +182,6 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->
 </body>
 </html>
