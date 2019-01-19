@@ -1,0 +1,14 @@
+#lineBackground{
+    background-image: url('img/blueLines.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#waterColorBackground{
+    background-image: url('img/watercolor.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
