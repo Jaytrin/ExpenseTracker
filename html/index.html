@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="script.js"></script>
     <script>
 
@@ -62,7 +63,7 @@
 <body>
 
 
-    <div id="waterColorBackground"style="height: 100vh;">
+    <div id="waterColorBackground"style="height: 100%;">
 <!-- Nav Bar Start -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark m-0 rounded-0">
                 <a class="navbar-brand" style="height: auto;" href="#">Navbar</a>
@@ -83,7 +84,7 @@
 <!-- Nav Bar End -->
 
 <!-- Doughnut Chart Container-->
-            <div class="container mb-3 mt-3 col-lg-6 d-flex p-0" id="lineBackground" style="height: 50vh">
+            <div class="container mb-0 mt-0 col-lg-6 d-flex p-0" id="lineBackground" style="height: 50vh">
                 <div class="align-self-center mx-auto">
                     <div class="doughnutChart">
                         <canvas id="doughnut-chart"></canvas>
@@ -93,44 +94,117 @@
 <!-- Doughnut Chart Container End -->    
 
 
-            <div class="container mb-3 mt-3 bg-white col-lg-6" style="height: 50vh">
+            <div class="container mt-0 mb-0 bg-white col-lg-6 pb-5" style="height: auto">
 <!-- Budget Graphs Start -->
             
                 <div class="container">
-                        <p class="h6 m-0 float-left mt-3 mb-1">Food</p>
-                        <p class="m-0 float-right text-secondary mt-2 mb-1" style="font-size: .75rem">$75 Remaining</p>
+                        <p class="h6 m-0 float-left mt-3 mb-0">Food</p>
+                        <p class="m-0 float-right text-secondary mt-3 mb-0" style="font-size: .75rem">$75 Remaining</p>
                     <div class="container p-0 progress" style="height: 1.5rem">
-                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <span class="justify-content-left position-absolute p-1">$25 of $100</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="container">
-                        <p class="h6 m-0 float-left mt-2 mb-1">Food</p>
-                        <p class="m-0 float-right text-secondary mt-2 mb-1" style="font-size: .75rem">$75 Remaining</p>
+                        <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
+                        <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
                     <div class="container p-0 progress" style="height: 1.5rem">
-                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar progress-bar-striped custom-orange" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <span class="justify-content-left position-absolute p-1">$25 of $100</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="container">
-                        <p class="h6 m-0 float-left mt-2 mb-1">Food</p>
-                        <p class="m-0 float-right text-secondary mt-2 mb-1" style="font-size: .75rem">$75 Remaining</p>
+                        <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
+                        <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
                     <div class="container p-0 progress" style="height: 1.5rem">
-                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar progress-bar-striped custom-yellow" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <span class="justify-content-left position-absolute p-1">$25 of $100</span>
                         </div>
                     </div>
                 </div>
 
-            
-            <div class="container">
-                <span class="h6"></span>Add Expense
+                <div class="container">
+                        <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
+                        <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
+                    <div class="container p-0 progress" style="height: 1.5rem">
+                        <div class="progress-bar progress-bar-striped custom-green" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <span class="justify-content-left position-absolute p-1">$25 of $100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                        <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
+                        <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
+                    <div class="container p-0 progress" style="height: 1.5rem">
+                        <div class="progress-bar progress-bar-striped custom-blue" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <span class="justify-content-left position-absolute p-1">$25 of $100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                        <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
+                        <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
+                    <div class="container p-0 progress" style="height: 1.5rem">
+                        <div class="progress-bar progress-bar-striped custom-purple" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <span class="justify-content-left position-absolute p-1">$25 of $100</span>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="container mt-1">
+                <i class="h6 fas fa-plus-circle"></i> Add Budget
             </div>
 <!-- Budget Graphs End -->
+<!-- Expense Table Start -->
+            <div class="container mt-3">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-hover mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Vendor</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>01/01/19</td>
+                            <td>Best Buy</td>
+                            <td>Computer Accessories</td>
+                            <td>Mouse</td>
+                            <td>$100.00</td>
+                        </tr>
+                        <tr>
+                            <td>02/21/19</td>
+                            <td>Amazon</td>
+                            <td>Computer Accessories</td>
+                            <td>Backpack</td>
+                            <td>$50.00</td>
+                        </tr>
+                        <tr>
+                            <td>08/11/19</td>
+                            <td>Costco</td>
+                            <td>Food</td>
+                            <td>Chicken</td>
+                            <td>$5.00</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="container mt-1">
+                    <i class="h6 fas fa-plus-circle"></i> Add Expense
+                </div>
+
 
 </div>
 
