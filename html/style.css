@@ -12,3 +12,47 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.custom-purple{
+    background-color: #8b7cf7;
+}
+
+.custom-blue{
+    background-color: #4285F4;
+}
+
+.custom-green{
+    background-color: #0F9D58;
+}
+
+.custom-yellow{
+    background-color: #F4B400;
+}
+
+.custom-orange{
+    background-color: #ff8c00;
+}
+
+.custom-red{
+    background-color: #DB4437;
+}
+
+thead {
+    background-color: #343A40;
+    color: white;
+} 
+
+th {
+    margin-left: .5rem;
+    margin-right: .5rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+table {
+    border-spacing: 1em;
+}
+
+tr td:last-child{
+    text-align: right;
+}

@@ -17,13 +17,13 @@ function createDoughnutChart(){
     new Chart(document.getElementById("doughnut-chart"), {
         type: 'doughnut',
         data: {
-          labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+          labels: ["Africa", "Asia", "Europe", "Latin America", "North America", "test"],
           datasets: [
             {
               label: "Population (millions)",
               borderWidth: [.5],
-              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-              data: [2478,5267,734,784,433]
+              backgroundColor: ["#8b7cf7", "#4285F4", "#0F9D58", "#F4B400", "#ff8c00", "#DB4437"],
+              data: [1478,5267,2734,1184,3833,2888]
             }
           ]
         },
