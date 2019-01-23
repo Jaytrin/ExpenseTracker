@@ -1,11 +1,28 @@
 $(document).ready(initializeApp);
 
 function initializeApp(){
-    createDoughnutChart();
+    // createDoughnutChart(); run on chart page
+    clickHandler();
+}
+/***************************************************************************************************
+ * clickHandlers
+ * 
+ * 
+ */
+//function to handle clicks
+
+function clickHandler(){
+    $('#signUpBtn').on('click', function() {
+        $('#signUpModal').modal('show')
+    });
+    $('#loginBtn').on('click', function() {
+        $('#loginModal').modal('show')
+    });
 }
 
-
-
+function clickHere(){
+    $('#signUpModal').modal('show')
+}
 /***************************************************************************************************
  * Create Pie Chart
  * 

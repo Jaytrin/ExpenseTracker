@@ -1,4 +1,4 @@
-#lineBackground{
+.lineBackground{
     background-image: url('img/blueLines.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-#waterColorBackground{
+.waterColorBackground{
     background-image: url('img/watercolor.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -83,4 +83,21 @@ tr td:last-child{
 .landingBtn{
     display: block;
     width: 70%;
+}
+
+.modal-body{
+    background-color: #343A40;
+    color: white;
+}
+
+.modal-footer{
+    background-color: #343A40;
+}
+
+#signUpModal{
+    width: 85%;
+}
+
+.clearBorder{
+    border: none;
 }

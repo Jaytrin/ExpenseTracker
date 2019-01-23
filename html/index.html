@@ -60,13 +60,89 @@
 
 </head>
 <body>
+
+<!-- SignUp Modal Start-->
+    <div class="modal fade mx-auto clearBorder" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered clearBorder" role="document">
+        <div class="modal-content clearBorder">
+            <div class="modal-header clearBorder waterColorBackground">
+                <h5 class="modal-title font-weight-bold clearBorder">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body clearBorder pb-0">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Please enter email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Username</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Please enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Password</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Please enter password">
+                        </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Please confirm password">
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="modal-footer clearBorder pt-0 rounded-bottom">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        </div>
+    </div>
+<!--SignUp Modal End-->
+
+<!-- login Modal Start-->
+      <div class="modal fade mx-auto clearBorder" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered clearBorder" role="document">
+        <div class="modal-content clearBorder">
+            <div class="modal-header clearBorder waterColorBackground">
+                <h5 class="modal-title font-weight-bold clearBorder">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body clearBorder pb-0">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Please enter username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Password</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Please enter password">
+                        </div>
+                   
+                </form>
+            </div>
+            <div class="modal-footer clearBorder pt-0 rounded-bottom">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        </div>
+    </div>
+<!--login Modal End-->
+
 <!--Landing Page Start-->
     <div class="landing"> 
         <div class="container col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <img class="logoImage" src="img/logo.svg" alt="Frugal Logo">
             <div class="container">
-                <button type="button" class="btn landingBtn custom-btn btn-lg mx-auto mt-5 font-weight-bold">Sign Up</button>
-                <button type="button" class="btn landingBtn btn-lg mx-auto mt-4 font-weight-bold bg-light">Login</button>
+                <button type="button" id="signUpBtn" class="btn landingBtn custom-btn btn-lg mx-auto mt-5 font-weight-bold">Sign Up</button>
+                <button type="button" id="loginBtn" class="btn landingBtn btn-lg mx-auto mt-4 font-weight-bold bg-light">Login</button>
                 <button type="button" class="btn landingBtn btn-primary btn-lg mx-auto mt-4 font-weight-bold">Google</button>
             </div>
         </div>
@@ -75,7 +151,7 @@
     </div>
 <!--Landing Page End-->
 
-    <!-- <div id="waterColorBackground"style="height: 100%;"> -->
+    <!-- <div class="waterColorBackground"style="height: 100%;"> -->
 <!-- Nav Bar Start -->
             <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark m-0 rounded-0">
                 <a class="navbar-brand pb-0" style="height: auto; font-weight: bold;" href="#">Fru<span class="logo">gal</span></a>
@@ -96,7 +172,7 @@
 <!-- Nav Bar End -->
 
 <!-- Doughnut Chart Container-->
-            <!-- <div class="container mb-0 mt-0 col-lg-6 d-flex p-0" id="lineBackground" style="height: 50vh">
+            <!-- <div class="container lineBackground mb-0 mt-0 col-lg-6 d-flex p-0" style="height: 50vh">
                 <div class="align-self-center mx-auto">
                     <div class="doughnutChart">
                         <canvas id="doughnut-chart"></canvas>
