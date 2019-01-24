@@ -9,6 +9,9 @@ server.use(express.static(__dirname + '/html'));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 
+// res.setHeader('Access-Control-Allow-Origin', '*');
+// res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
 database.connect((err) => {
     if(err){
         console.log('connection to database failed');

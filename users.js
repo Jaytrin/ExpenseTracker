@@ -14,13 +14,13 @@ module.exports = (app, database) => {
         const fname = request.body.fname;
         const lname = request.body.lname;
         const password = request.body.password;
+        const status = 'active';
         
     //User Creation
         //Build query for item
-        const userSubmitQuery = "INSERT INTO user SET ID = null, username = ?, email = ?, fname = ?, lname = ?";
-        const userSubmitInserts = [username, email, fname, lname];
+        const userSubmitQuery = "INSERT INTO user SET ID = null, username = ?, email = ?, fname = ?, lname = ?, status = ?";
+        const userSubmitInserts = [username, email, fname, lname, status];
         const userSubmitSql = mysql.format(userSubmitQuery, userSubmitInserts);
-
         //Query to check if username exists
         const userCheckQuery = "SELECT ID FROM user WHERE username = ?";
         const userCheckSql = mysql.format(userCheckQuery, username);
@@ -45,7 +45,6 @@ module.exports = (app, database) => {
 
                                 //Hash and insert password
                                 bcrypt.hash(password, saltRounds, (error, hash) => {
-
                                     const userIDQuery = "SELECT ID FROM user WHERE username = ? AND email = ?";
                                     const userIDInserts = [username, email];
                                     const userIDSQL = mysql.format(userIDQuery,userIDInserts);
@@ -61,7 +60,7 @@ module.exports = (app, database) => {
                                                 if(!error){
                                                     console.log('Password successfully submitted');
                                                 } else {console.log('Error creating password')
-                                                console.log('password: ', password);
+                                                console.log('password: ', hash);
                                                 console.log('user_id: ',userID);
                                             }
                                             });
@@ -91,40 +90,48 @@ module.exports = (app, database) => {
         }
         const username = request.body.username;
         const password = request.body.password;
+        console.log('request', request.body);
+        console.log('username: ',username);
+        console.log('password: ',password);
+        const checkMatch = {match: false};
 
         //Checks inputted password against database and returns true of false if match
         bcrypt.genSalt(saltRounds, function(error, salt) {
             bcrypt.hash(password, salt, function(error, hash) {
                 bcrypt.compare(password, hash, function(error, response) {
                     if(!error && response == true){
-                        const match = true;
-                        console.log('Match: ', match);
-                    } else {const match = false;
-                        console.log('Match: ', match);}    
-                });});});
+                        console.log('compare true');
+                        checkMatch.match = true;
+
+                        database.connect(()=>{
+                            const loginQuery = `SELECT u.ID as ID, u.username, u.email, u.fname, u.lname, u.status 
+                                           FROM user AS u
+                                           JOIN password AS p
+                                           ON u.ID = p.user_id 
+                                           WHERE u.username = ? AND status = ?`;
+                            const loginInserts = [username, 'active'];
+                            const loginSQL = mysql.format(loginQuery, loginInserts);
+                            
+                            database.query(loginSQL, (error, data, fields) => {
+                                if(!error){
+                                    console.log('Output: ', output);
+                                    output['success'] = true;
+                                    output['loggedin'] = true;
+                                    console.log('Output: ', output);
+                                    request.session = data[0];
+                                    console.log('session data: ', request.session);
+                                } else {
+                                    console.log('Error running query');
+                                }
+                            })
+                        });
+
+                    } else {
+                        console.log('Something did not match'); 
+                }})})});
+                // );});}});
+                console.log('Match2: ', checkMatch.match);
         
-        database.connect(()=>{
-            const loginQuery = `SELECT u.ID, u.username, u.email, u.fname, u.lname, u.status 
-                           FROM user AS u
-                           JOIN password AS p
-                           ON u.ID = p.user_id 
-                           WHERE u.username = ? AND p.hash = ? AND status = ?`;
-            const loginInserts = [username, password, 'active'];
-            const loginSQL = mysql.format(loginQuery, loginInserts);
-            database.query(loginSQL, (error, data, fields) => {
-                if(!error){
-                    console.log(data[0]);
-                    console.log('Output: ', output);
-                    output['success'] = true;
-                    output['loggedin'] = true;
-                    console.log('Output: ', output);
-                    request.session = data[0];
-                    console.log('session data: ', request.session);
-                } else {
-                    console.log('Error running query');
-                }
-            })
-        })
 });
 
 app.post('/logout', (request, response)=>{
