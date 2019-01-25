@@ -108,16 +108,41 @@ function createDoughnutChart(){
     function login(){
         console.log('login running');
         
-        var user = $("input.login[name=username]").val();
-        var pass = $("input.login[name=password]").val();
-        
+        var username = $("input.login[name=username]").val();
+        var password = $("input.login[name=password]").val();
+
         $.ajax({
             url: 'http://localhost:3050/login',
             cache: false,
             data: {
-                username: user,
-                password: pass
+                username: username,
+                password: password
             },
             method: 'post',
             dataType: 'json'
-        })}
+    }).then(console.log('finished ajax'));
+
+
+}
+
+/***************************************************************************************************
+ * Update DOM with main page
+ */
+//function runs after login and updates the DOM with contents of the main page
+
+function loadMainPage(){
+    $('.landing-page').remove();
+}
+
+/***************************************************************************************************
+ * Update DOM with main page
+ */
+//function runs after login and updates the DOM with contents of the main page
+function handleLoggedStatus(data){
+    console.log('handling login');
+    if(data.loggedin){
+        console.log('Logged in successful');
+    } else {
+        console.log('Logged in failed');
+    }
+}
