@@ -101,3 +101,11 @@ tr td:last-child{
 .clearBorder{
     border: none;
 }
+
+#addBudget{
+    width: auto;
+}
+
+.transparent{
+    background-color: transparent;
+}

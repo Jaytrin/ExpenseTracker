@@ -126,6 +126,60 @@
     </div>
 <!--login Modal End-->
 
+<!-- Budget Limit Modal Start-->
+<div class="modal fade mx-auto clearBorder" id="budgetLimitModal" tabindex="-1" role="dialog" aria-labelledby="budgetLimitModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered clearBorder" role="document">
+    <div class="modal-content clearBorder">
+        <div class="modal-header clearBorder bg-danger">
+            <h5 class="modal-title font-weight-bold clearBorder text-white">Budget limit reached</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body bg-light text-dark pb-0">
+            <p class="m-0 text-dark">The maximum number of budgets (6) has been reached. Please delete a budget before attempting to create a new one.</p>
+        </div>
+        <div class="modal-footer clearBorder pt-0 rounded-bottom bg-light">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
+<!--Budget Limit Modal End-->
+
+<!-- Create Budget Modal Start-->
+<div class="modal fade mx-auto clearBorder" id="createBudgetModal" tabindex="-1" role="dialog" aria-labelledby="createBudgetModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered clearBorder" role="document">
+    <div class="modal-content clearBorder">
+        <div class="modal-header clearBorder waterColorBackground">
+            <h5 class="modal-title font-weight-bold clearBorder">Create Budget</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body clearBorder pb-0">
+            <form>
+                <div class="form-group">
+                    <label for="budgetNameInput">Budget Name</label>
+                    <input type="text" class="form-control budget" name="budgetName" aria-describedby="budgetNameInput" id = 'aD' placeholder="Please enter budget name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budgetAmountInput">Budget Amount</label>
+                        <input type="number" class="form-control budget" name="budgetAmount" aria-describedby="budgetAmountInput" placeholder="Please enter budget amount">
+                    </div>
+               
+            </form>
+        </div>
+        <div class="modal-footer clearBorder pt-0 rounded-bottom">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="budgetSubmit" type="button" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    </div>
+</div>
+<!--Create Budget Modal End-->
+
 <!--Landing Page Start-->
     <div class="landing landing-page"> 
         <div class="container col-xs-6 col-sm-6 col-md-6 col-lg-6">

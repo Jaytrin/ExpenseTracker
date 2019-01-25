@@ -78,8 +78,7 @@ module.exports = (app, database) => {
 
     });
 
-    app.post('/login', (request, response)=>{
-        // response.send('Login Attempted');
+    app.post('/login', (request, res)=>{
         console.log('login working');
         const sessionParams = {
             secret: 'gottacatchemall',
@@ -121,6 +120,7 @@ module.exports = (app, database) => {
                                     success: false,
                                     loggedin: false
                                 };
+                                console.log('output within query: ', output);
                                 if(!error){
                                     console.log('Output: ', output);
                                     output['success'] = true;
@@ -132,16 +132,16 @@ module.exports = (app, database) => {
                                     console.log('Error running query');
                                 }
                                 console.log('outer console: ', output);
-                                // response.send(JSON.stringify(output));
-
+                                // console.log('response: ', res);
+                                res.send(JSON.stringify(output));
                             })
                         });
 
                     } else {
                         console.log('Something did not match'); 
                 }})})});
-                console.log('final: ', output);
-                
+                // console.log('final: ', output);
+                // response.send(JSON.stringify(output));
 });
 
 app.post('/logout', (request, response)=>{
