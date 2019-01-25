@@ -6,9 +6,15 @@ const session = require('express-session');
 module.exports = (app, database) => {
     console.log('connected to users');
 
+    app.post('/test',(request, response)=>{
+
+        console.log('test called');
+
+    });
+
     app.post('/signUp', (request, response)=>{
         response.send('Sign Up Attempted');
-
+        console.log('signup called');
         const username = request.body.username;
         const email = request.body.email;
         const fname = request.body.fname;
@@ -72,22 +78,19 @@ module.exports = (app, database) => {
 
     });
 
-    app.post('/login', (request, response)=>{
-        response.send('Login Attempted');
-
+    app.post('/login', (request, res)=>{
+        console.log('login working');
         const sessionParams = {
             secret: 'gottacatchemall',
             resave: false, 
             saveUninitialized: true, 
             cookie: {secure: false}
         };
+
         const sessionExec = session(sessionParams);
         app.use(sessionExec);
     
-        const output={
-            success: false,
-            loggedin: false
-        }
+        
         const username = request.body.username;
         const password = request.body.password;
         console.log('request', request.body);
@@ -113,6 +116,11 @@ module.exports = (app, database) => {
                             const loginSQL = mysql.format(loginQuery, loginInserts);
                             
                             database.query(loginSQL, (error, data, fields) => {
+                                const output={
+                                    success: false,
+                                    loggedin: false
+                                };
+                                console.log('output within query: ', output);
                                 if(!error){
                                     console.log('Output: ', output);
                                     output['success'] = true;
@@ -123,15 +131,17 @@ module.exports = (app, database) => {
                                 } else {
                                     console.log('Error running query');
                                 }
+                                console.log('outer console: ', output);
+                                // console.log('response: ', res);
+                                res.send(JSON.stringify(output));
                             })
                         });
 
                     } else {
                         console.log('Something did not match'); 
                 }})})});
-                // );});}});
-                console.log('Match2: ', checkMatch.match);
-        
+                // console.log('final: ', output);
+                // response.send(JSON.stringify(output));
 });
 
 app.post('/logout', (request, response)=>{
