@@ -161,7 +161,7 @@
             <form>
                 <div class="form-group">
                     <label for="budgetNameInput">Budget Name</label>
-                    <input type="text" class="form-control budget" name="budgetName" aria-describedby="budgetNameInput" id = 'aD' placeholder="Please enter budget name">
+                    <input type="text" class="form-control budget" name="budgetName" aria-describedby="budgetNameInput" placeholder="Please enter budget name">
                     </div>
 
                     <div class="form-group">
@@ -179,6 +179,54 @@
     </div>
 </div>
 <!--Create Budget Modal End-->
+
+<!-- Create Expense Modal Start-->
+<div class="modal fade mx-auto clearBorder" id="createExpenseModal" tabindex="-1" role="dialog" aria-labelledby="createExpenseModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered clearBorder" role="document">
+    <div class="modal-content clearBorder">
+        <div class="modal-header clearBorder waterColorBackground">
+            <h5 class="modal-title font-weight-bold clearBorder">Create Expense</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body clearBorder pb-0">
+            <form>
+                <div class="form-group">
+                    <label for="dateInput">Date</label>
+                    <input type="text" class="form-control budget" name="date" aria-describedby="date" placeholder="Please enter date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vendorInput">Vendor</label>
+                        <input type="number" class="form-control budget" name="vendor" aria-describedby="vendor" placeholder="Please enter vendor">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryInput">Category</label>
+                        <input type="number" class="form-control budget" name="category" aria-describedby="category" placeholder="Please enter category">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemInput">Item</label>
+                        <input type="number" class="form-control budget" name="item" aria-describedby="item" placeholder="Please enter item name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priceInput">Price</label>
+                        <input type="number" class="form-control budget" name="price" aria-describedby="price" placeholder="Please enter price">
+                    </div>
+               
+            </form>
+        </div>
+        <div class="modal-footer clearBorder pt-0 rounded-bottom">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="" type="button" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    </div>
+</div>
+<!--Create Expense Modal End-->
 
 <!--Landing Page Start-->
     <div class="landing landing-page"> 

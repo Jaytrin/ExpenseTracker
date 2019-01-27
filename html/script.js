@@ -285,7 +285,7 @@ let mainPage = `
                     </div>
                 </div>
                 
-                <div class="container mt-1">
+                <div class="container mt-1" id="addExpense">
                         <i class="h6 fas fa-plus-circle"></i> Add Expense
                     </div>
     <!-- Expense Table Start-->
@@ -296,8 +296,10 @@ let mainPage = `
     $('body').append(mainPage);
     createDoughnutChart();
     $('#addBudget').on('click',budgetLimiter);
-    
     $('#budgetSubmit').on('click',createBudget);
+    $('#addExpense').on('click',()=>{
+        $('#createExpenseModal').modal('show');
+    });
     
 }
 
@@ -333,8 +335,7 @@ function handleLoggedStatus(data){
  */
 //function creates budget and adds to budget section
 function createBudget(options) {
-   console.log('initial options', options);
-
+        console.log('initial options', options);
 
         if(!options){
             options = {
@@ -348,7 +349,7 @@ function createBudget(options) {
             width: null
             };
         }
-        
+
         console.log('new options', options);
 
         if(initialCheck.budget){
@@ -385,3 +386,55 @@ function createBudget(options) {
     
     $('#createBudgetModal').modal('hide');
 }
+
+/***************************************************************************************************
+ * Add expense
+ */
+//function creates expense to add to the expense area
+function createExpense(options) {
+ 
+    if(!options){
+        options = {
+        margin: 'mt-1',
+        budgetName: null,
+        budgetAmount: null,
+        budgetSpent: null,
+        budgetRemaining: null,
+        ariaValueNow: null,
+        ariaValueMax: null,
+        width: null
+        };
+    }
+
+    options.budgetName = $("input.budget[name=budgetName]").val();
+    options.budgetAmount = $("input.budget[name=budgetAmount]").val();
+
+         console.log('new options', options);
+ 
+         if(initialCheck.budget){
+             options.margin = 'mt-3'
+             $('.initial-budget').empty();
+             initialCheck.budget = false;
+         }
+
+ 
+         console.log('updated options', options);
+ 
+         let budget = `
+             <div class="container">
+                 <p class="h6 m-0 float-left ${options.margin} mb-0">${options.budgetName}</p>
+                 <p class="m-0 float-right text-secondary ${options.margin} mb-0" style="font-size: .75rem">$${options.budgetRemaining} Remaining</p>
+                 <div class="container p-0 progress" style="height: 1.5rem">
+                     <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: ${options.width}%" aria-valuenow="${options.ariaValueNow}" aria-valuemin="20" aria-valuemax="${options.ariaValueMax}">
+                         <span class="justify-content-left position-absolute p-1">$${options.budgetSpent} of $${options.budgetAmount}</span>
+                     </div>
+                 </div>
+             </div>`;
+ 
+         console.log('budget html: ', budget);
+ 
+         $('div.budgetSection').append(budget);
+         initialCheck.budgetBarCount++;
+     
+     $('#createBudgetModal').modal('hide');
+ }
