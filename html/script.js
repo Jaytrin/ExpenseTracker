@@ -395,19 +395,16 @@ function createExpense(options) {
  
     if(!options){
         options = {
-        margin: 'mt-1',
-        budgetName: null,
-        budgetAmount: null,
-        budgetSpent: null,
-        budgetRemaining: null,
-        ariaValueNow: null,
-        ariaValueMax: null,
-        width: null
-        };
+        vendor: null,
+        item: null,
+        category: null,
+        price: null
     }
 
-    options.budgetName = $("input.budget[name=budgetName]").val();
-    options.budgetAmount = $("input.budget[name=budgetAmount]").val();
+    options.venodr = $("input.expense[name=vendorInput]").val();
+    options.item = $("input.expense[name=itemInput]").val();
+    options.category = $("input.expense[name=categoryInput]").val();
+    options.price = $("input.expense[name=priceInput]").val();
 
          console.log('new options', options);
  
@@ -420,14 +417,14 @@ function createExpense(options) {
  
          console.log('updated options', options);
  
-         let budget = `
-             <div class="container">
-                 <p class="h6 m-0 float-left ${options.margin} mb-0">${options.budgetName}</p>
-                 <p class="m-0 float-right text-secondary ${options.margin} mb-0" style="font-size: .75rem">$${options.budgetRemaining} Remaining</p>
-                 <div class="container p-0 progress" style="height: 1.5rem">
-                     <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: ${options.width}%" aria-valuenow="${options.ariaValueNow}" aria-valuemin="20" aria-valuemax="${options.ariaValueMax}">
-                         <span class="justify-content-left position-absolute p-1">$${options.budgetSpent} of $${options.budgetAmount}</span>
-                     </div>
+        //  let budget = `
+        //      <div class="container">
+        //          <p class="h6 m-0 float-left ${options.margin} mb-0">${options.budgetName}</p>
+        //          <p class="m-0 float-right text-secondary ${options.margin} mb-0" style="font-size: .75rem">$${options.budgetRemaining} Remaining</p>
+        //          <div class="container p-0 progress" style="height: 1.5rem">
+        //              <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: ${options.width}%" aria-valuenow="${options.ariaValueNow}" aria-valuemin="20" aria-valuemax="${options.ariaValueMax}">
+        //                  <span class="justify-content-left position-absolute p-1">$${options.budgetSpent} of $${options.budgetAmount}</span>
+        //              </div>
                  </div>
              </div>`;
  
