@@ -3,7 +3,8 @@ $(document).ready(initializeApp);
 const initialCheck = {
     budget: true,
     budgetBarCount: 0,
-    expense: true
+    expense: true,
+    expenseRowCount: 0
 };
 
 function initializeApp(){
@@ -280,7 +281,7 @@ let mainPage = `
     $('#addExpense').on('click',()=>{
         $('#createExpenseModal').modal('show');
     });
-    
+    $('#expenseSubmit').on('click',createExpense);
 }
 
 /***************************************************************************************************
@@ -380,7 +381,7 @@ function createExpense(options) {
         item: null,
         category: null,
         price: null
-    }
+    }}
 
     options.date = $("input.expense[name=dateInput]").val();
     options.vendor = $("input.expense[name=vendorInput]").val();
@@ -401,8 +402,12 @@ function createExpense(options) {
      `;
  
          console.log('budget html: ', expense);
- 
-         $('tbody.expenseSection').append(expense);
+         initialCheck.expenseRowCount++;
+         if(initialCheck.expenseRowCount < 2){
+            $('tbody.expenseSection').append(expense);
+        } else {
+            console.log('show next 10');
+        }
      
      $('#createExpenseModal').modal('hide');
  }
