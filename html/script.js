@@ -4,11 +4,17 @@ const initialCheck = {
     budget: true,
     budgetBarCount: 0,
     expense: true,
-    expenseRowCount: 0
+    expenseRowCount: 0,
+    currentUser: null
 };
 
+const budgetObject = {
+    labels: [],
+    values: []
+};
+
+
 function initializeApp(){
-    // createDoughnutChart(); run on chart page
     clickHandler();
 }
 /***************************************************************************************************
@@ -39,17 +45,18 @@ function clickHere(){
  */
 //function to create labels, background color and data.
 
-function createDoughnutChart(){
-    new Chart(document.getElementById("doughnut-chart"), {
+function createDoughnutChart(dataObject){
+    var chartLocation = document.getElementById("doughnut-chart");
+    var newChart = new Chart(chartLocation, {
         type: 'doughnut',
         data: {
-          labels: ["Africa", "Asia", "Europe", "Latin America", "North America", "test"],
+          labels: [],
           datasets: [
             {
-              label: "Population (millions)",
+              label: "Budget Allocation",
               borderWidth: [.5],
               backgroundColor: ["#8b7cf7", "#4285F4", "#0F9D58", "#F4B400", "#ff8c00", "#DB4437"],
-              data: [1478,5267,2734,1184,3833,2888]
+              data: []
             }
           ]
         },
@@ -70,13 +77,22 @@ function createDoughnutChart(){
             },
           title: {
             display: false,
-            text: 'Predicted world population (millions) in 2050'
+            text: 'Allocation of Budgets'
           },
           legend: {
             display: false
          }
         }
     });
+
+    if(dataObject){
+        newChart.data.labels = dataObject.labels;
+        console.log('labels: ', newChart.data.labels);
+        console.log('data: ', newChart.data.datasets.data);
+        newChart.data.datasets[0].data = dataObject.values;
+        newChart.update();
+    }
+
 }
 
 
@@ -129,7 +145,7 @@ function createDoughnutChart(){
             dataType: 'json'
     }).then(handleLoggedStatus);
 
-
+    initialCheck.currentUser = username;
 }
 
 /***************************************************************************************************
@@ -363,9 +379,15 @@ function createBudget(options) {
         console.log('budget html: ', budget);
 
         $('div.budgetSection').append(budget);
+
+
         initialCheck.budgetBarCount++;
     
     $('#createBudgetModal').modal('hide');
+    budgetObject.labels.push(options.budgetName);
+    budgetObject.values.push(options.budgetAmount);
+
+    createDoughnutChart(budgetObject);
 }
 
 /***************************************************************************************************
@@ -374,40 +396,80 @@ function createBudget(options) {
 //function creates expense to add to the expense area
 function createExpense(options) {
  
-    if(!options){
-        options = {
-        date: null,
+    if(!options){   
+        options= {dates: null,
         vendor: null,
         item: null,
-        category: null,
+        budgetCategory: null,
         price: null
-    }}
+    }};
 
-    options.date = $("input.expense[name=dateInput]").val();
-    options.vendor = $("input.expense[name=vendorInput]").val();
-    options.item = $("input.expense[name=itemInput]").val();
-    options.category = $("input.expense[name=categoryInput]").val();
-    options.price = $("input.expense[name=priceInput]").val();
+    console.log('options: ', options);
+
+    options.date = $("input.expense[name=date]").val();
+    console.log('options.date', options.date);
+
+    options.vendor = $("input.expense[name=vendor]").val();
+    console.log('options.vendor', options.vendor);
+
+    options.item = $("input.expense[name=item]").val();
+    console.log('options.item', options.item);
+
+    options.budgetCategory = $("input.expense[name=category]").val();
+    console.log('options.budgetCategory', options.budgetCategory);
+
+    options.price = $("input.expense[name=price]").val();
+    console.log('options.price', options.price);
  
+console.log('options: ', options);
+
+$.ajax({
+    url: 'http://localhost:3050/submitExpense',
+    cache: false,
+    data: {
+        item: options.item,
+        price: options.price,
+        vendor: options.vendor,
+        category: options.budgetCategory,
+        date: options.date,
+        username: initialCheck.username
+    },
+    method: 'post',
+    dataType: 'json'
+});
          console.log('updated options', options);
- 
-         let expense = `
-            <tr>
-                <td>${options.date}</td>
-                <td>${options.vendor}</td>
-                <td>${options.category}</td>
-                <td>${options.item}</td>
-                <td>${options.price}</td>
-            </tr>
-     `;
- 
-         console.log('budget html: ', expense);
-         initialCheck.expenseRowCount++;
-         if(initialCheck.expenseRowCount < 2){
-            $('tbody.expenseSection').append(expense);
-        } else {
-            console.log('show next 10');
-        }
-     
+         var optionsArray = [];
+         optionsArray.push(options);
+
+         loadExpense(optionsArray);
      $('#createExpenseModal').modal('hide');
  }
+
+
+ /***************************************************************************************************
+ * Load expenses
+ */
+//function that loads expenses
+
+function loadExpense(expenseArray){
+    for(let i = 0; i < expenseArray.length; i++){
+
+        let expense = `
+            <tr>
+                <td>${expenseArray[i].date}</td>
+                <td>${expenseArray[i].vendor}</td>
+                <td>${expenseArray[i].budgetCategory}</td>
+                <td>${expenseArray[i].item}</td>
+                <td>${expenseArray[i].price}</td>
+            </tr>
+     `;
+
+     initialCheck.expenseRowCount++;
+     
+     if(initialCheck.expenseRowCount < 10){
+        $('tbody.expenseSection').append(expense);
+    } else {
+        return console.log('show next 10');
+    }
+    }
+}
