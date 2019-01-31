@@ -2,18 +2,64 @@ const mysql = require('mysql');
 
 module.exports = (app, database) => {
     console.log('connected to trackexpense');
+
+    app.post('/submitBudget', (request, response)=>{
+        response.send('Thank you for submitting a budget');
+        
+        const budget = request.body.budget;
+        const budget = request.body.amount;
+    //Adjust amount remaining
+
+    //Budget Section
+        //Buil query for budget
+        const budgetQuery = "INSERT INTO budget SET ID = null, name = ?, amount = ?";
+        const budgetInserts = [budget, amount];
+        const budgetSql = mysql.format(budgetQuery,budgetInserts);
+
+        database.query(budgetSql, (error, data, field) => {
+            if(!error){
+                console.log('Budget successfully submitted.');
+            } else {
+                console.log('Budget failed to submit');
+            }
+        })
+    }
+
+    app.post('/submitBudget', (request, response)=>{
+        response.send('Thank you for submitting a budget');
+        
+        const budget = request.body.budget;
+        const budget = request.body.amount;
+    //Adjust amount remaining
+
+    //Budget Section
+        //Buil query for budget
+        const budgetQuery = "INSERT INTO budget SET ID = null, name = ?, amount = ?";
+        const budgetInserts = [budget, amount];
+        const budgetSql = mysql.format(budgetQuery,budgetInserts);
+
+        database.query(budgetSql, (error, data, field) => {
+            if(!error){
+                console.log('Budget successfully submitted.');
+            } else {
+                console.log('Budget failed to submit');
+            }
+        })
+    }
+
     app.post('/submitExpense', (request, response)=>{
         response.send('Thank you for submitting an expense');
-
+        
+        const date = request.body.date;
         const item = request.body.item;
         const price = request.body.price;
         const vendor = request.body.vendor;
-        const category = request.body.category;
-        
+        const username = request.body.username;
+
     //Item Section
         //Build query for item
-        const itemQuery = "INSERT INTO item SET ID = null, name = ?, unit_price = ?";
-        const itemInserts = [item, price];
+        const itemQuery = "INSERT INTO item SET ID = null, date=?, name = ?, price = ?";
+        const itemInserts = [date, item, price];
         const itemSql = mysql.format(itemQuery, itemInserts);
 
         //Build query to check if item already within database
@@ -105,31 +151,31 @@ module.exports = (app, database) => {
                                 } else {console.log('Could not find category')}
                             })
                             console.log(itemCategoryID);
-
-                            
-
-
                      } else {console.log('Category failed to be inputted.');
         }});}})
 
-    //Create transaction
-     //Build query for category
-    //  const transactionQuery = "INSERT INTO transaction SET ID = null, user_id = ?";
-    //  const transactionInserts = [category];
-    //  const transactionSql = mysql.format(categoryQuery, categoryInserts);
+    // Create transaction
+    //  Build query for category
+     const transactionQuery = "INSERT INTO transaction SET ID = null, user_id = ?";
+     const findUserQuery = "SELECT ID FROM user WHERE username = ?";
+     const findUserInserts = [username];
+     const findUserSql = mysql.format(findUserQuery, findUserInserts);
+     const userID = {id: null};
+     database.query(findUserSql, (error, data, fields) => {
+                if(!error){
+                    userID.id = data[0];
+                 } else {console.log('Could not find username.');
+    }});
+    
+     const transactionInserts = [userID.id];
+     const transactionSql = mysql.format(transactionQuery, transactionInserts);
 
-    //  //Build query to check if category already within database
-    //  const categoryCheckQuery = "SELECT ID FROM category WHERE name = ?";
-    //  const categoryCheckSql = mysql.format(categoryCheckQuery, categoryInserts);
-
-    //     //Run query to check for category and insert if not in database
-    //     database.query(categoryCheckSql, (error, data, fields) => {
-    //      if(!data.length){
-    //          database.query(categorySql, (error, data, fields)=>{
-    //              if(!error){
-    //                  console.log('Category successfully inputted.');
-    //               } else {console.log('Category failed to be inputted.');
-    //  }});}})
+        //Run query to check for category and insert if not in database
+        database.query(transactionSql, (error, data, fields) => {
+                 if(!error){
+                     console.log('Category successfully inputted.');
+                  } else {console.log('Category failed to be inputted.');
+     }})
 
 
 
