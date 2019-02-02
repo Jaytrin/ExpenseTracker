@@ -194,7 +194,7 @@
             <form>
                 <div class="form-group">
                     <label for="dateInput">Date</label>
-                    <input type="date" class="form-control expense" name="date" aria-describedby="date" placeholder="Please enter date">
+                    <input type="date" class="form-control expense" name="date" aria-describedby="date">
                     </div>
 
                     <div class="form-group">
@@ -203,8 +203,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="categoryInput">Category</label>
-                        <input type="text" class="form-control expense" name="category" aria-describedby="category" placeholder="Please enter category">
+                        <label for="priceInput">Budget</label>
+                        <input list="budgets" class="form-control expense" name="budget" aria-describedby="budget">
+                        <datalist id="budgets">
+                            <option value="toys">
+                            <option value="computers">
+                            <option value="food">
+                        </datalist>
                     </div>
 
                     <div class="form-group">
@@ -216,7 +221,6 @@
                         <label for="priceInput">Price</label>
                         <input type="text" class="form-control expense" name="price" aria-describedby="price" placeholder="Please enter price">
                     </div>
-               
             </form>
         </div>
         <div class="modal-footer clearBorder pt-0 rounded-bottom">
