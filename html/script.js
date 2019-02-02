@@ -270,7 +270,7 @@ let mainPage = `
                             <tr>
                                 <th scope="col">Date</th>
                                 <th scope="col">Vendor</th>
-                                <th scope="col">Category</th>
+                                <th scope="col">Budget</th>
                                 <th scope="col">Item</th>
                                 <th scope="col">Price</th>
                             </tr>
@@ -400,7 +400,7 @@ function createExpense(options) {
         options= {dates: null,
         vendor: null,
         item: null,
-        budgetCategory: null,
+        budget: null,
         price: null
     }};
 
@@ -415,8 +415,8 @@ function createExpense(options) {
     options.item = $("input.expense[name=item]").val();
     console.log('options.item', options.item);
 
-    options.budgetCategory = $("input.expense[name=category]").val();
-    console.log('options.budgetCategory', options.budgetCategory);
+    options.budget = $("input.expense[name=budget]").val();
+    console.log('options.budget', options.budget);
 
     options.price = $("input.expense[name=price]").val();
     console.log('options.price', options.price);
@@ -427,12 +427,12 @@ $.ajax({
     url: 'http://localhost:3050/submitExpense',
     cache: false,
     data: {
+        date: options.date,
         item: options.item,
         price: options.price,
         vendor: options.vendor,
-        category: options.budgetCategory,
-        date: options.date,
-        username: initialCheck.username
+        username: initialCheck.currentUser,
+        budget: options.budget
     },
     method: 'post',
     dataType: 'json'
@@ -458,7 +458,7 @@ function loadExpense(expenseArray){
             <tr>
                 <td>${expenseArray[i].date}</td>
                 <td>${expenseArray[i].vendor}</td>
-                <td>${expenseArray[i].budgetCategory}</td>
+                <td>${expenseArray[i].budget}</td>
                 <td>${expenseArray[i].item}</td>
                 <td>${expenseArray[i].price}</td>
             </tr>
