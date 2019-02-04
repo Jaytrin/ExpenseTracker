@@ -322,6 +322,7 @@ function handleLoggedStatus(data){
     if(data.loggedin){
         console.log('Logged in successful');
         loadMainPage();
+        getData();
     } else {
         console.log('Logged in failed');
     }
@@ -472,4 +473,21 @@ function loadExpense(expenseArray){
         return console.log('show next 10');
     }
     }
+}
+/***************************************************************************************************
+ * Get Data
+ */
+//function gets all budget and expense data related to the current user
+
+function getData(){
+
+    $.ajax({
+        url: 'http://localhost:3050/getData',
+        cache: false,
+        data: {
+            username: initialCheck.currentUser
+        },
+        method: 'post',
+        dataType: 'json'
+    });
 }

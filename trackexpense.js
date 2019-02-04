@@ -33,20 +33,36 @@ module.exports = (app, database) => {
         const username = request.body.username;
 
     //Get budget Section
-        const getBudgetQuery = `SELECT b.name, b.amount, b.remaining
+        const getBudgetQuery = `SELECT b.name AS budget, b.amount, b.remaining, e.date, e.vendor, e.item, e.price
                              FROM budget AS b 
                              JOIN budget_expense AS be 
                              ON b.ID = be.budget_id
+                             JOIN expense AS e
+                             ON e.ID = be.expense_id
                              JOIN user AS u 
                              ON u.ID = be.user_id 
-                             WHERE user.username = ?`;
+                             WHERE u.username = ?`;
                              
         const getBudgetInserts = [username];
         const getBudgetSql = mysql.format(getBudgetQuery,getBudgetInserts);
 
-        database.query(budgetSql, (error, data, field) => {
+        database.query(getBudgetSql, (error, data, field) => {
             if(!error){
+                const displayData = [];
+                for(let i = 0; i < data.length; i++){
+                    const rowData = {};
+                    displayData['budget'] = data[i]['budget'];
+                    displayData['amount'] = date[i]['amount'];
+                    displayData['remaining'] = date[i]['remaining'];
+                    displayData['date'] = date[i]['date'];
+                    displayData['vendor'] = date[i]['vendor'];
+                    displayData['item'] = date[i]['item'];
+                    displayData['price'] = date[i]['price'];
+                    displayData.push(rowData);
+                }
                 console.log('Budget successfully submitted.');
+                console.log(displayData);
+                return displayData;
             } else {
                 console.log('Budget failed to submit');
             }
@@ -150,6 +166,7 @@ module.exports = (app, database) => {
 
         getIDs();
 });
+
 
 
 function updateBudgetAmount(budgetID){
