@@ -46,8 +46,12 @@ function clickHere(){
 //function to create labels, background color and data.
 
 function createDoughnutChart(dataObject){
-    var chartLocation = document.getElementById("doughnut-chart");
-    var newChart = new Chart(chartLocation, {
+    $('.doughnutChart').empty();
+    let newChartElement = `<canvas id="doughnut-chart"></canvas>`;
+    $('.doughnutChart').append(newChartElement);
+
+    let chartLocation = document.getElementById("doughnut-chart");
+    let newChart = new Chart(chartLocation, {
         type: 'doughnut',
         data: {
           labels: [],
@@ -103,11 +107,11 @@ function createDoughnutChart(dataObject){
 
     function signUp(){
         console.log('sign up running');
-        var fname = $("input.signUp[name=fname]").val();
-        var lname = $("input.signUp[name=lname]").val();
-        var email = $("input.signUp[name=email]").val();
-        var username = $("input.signUp[name=username]").val();
-        var password = $("input.signUp[name=password]").val();
+        let fname = $("input.signUp[name=fname]").val();
+        let lname = $("input.signUp[name=lname]").val();
+        let email = $("input.signUp[name=email]").val();
+        let username = $("input.signUp[name=username]").val();
+        let password = $("input.signUp[name=password]").val();
 
         $.ajax({
             url: 'http://localhost:3050/signUp',
@@ -131,8 +135,8 @@ function createDoughnutChart(dataObject){
     function login(){
         console.log('login running');
         
-        var username = $("input.login[name=username]").val();
-        var password = $("input.login[name=password]").val();
+        let username = $("input.login[name=username]").val();
+        let password = $("input.login[name=password]").val();
 
         $.ajax({
             url: 'http://localhost:3050/login',
@@ -196,65 +200,6 @@ let mainPage = `
                     </div>
                     <div class="budgetSection">
                     </div>
-                    <!-- <div class="container">
-                            <p class="h6 m-0 float-left mt-3 mb-0">Food</p>
-                            <p class="m-0 float-right text-secondary mt-3 mb-0" style="font-size: .75rem">$75 Remaining</p>
-                        <div class="container p-0 progress" style="height: 1.5rem">
-                            <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <span class="justify-content-left position-absolute p-1">$25 of $100</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="container">
-                            <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
-                            <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
-                        <div class="container p-0 progress" style="height: 1.5rem">
-                            <div class="progress-bar progress-bar-striped custom-orange" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <span class="justify-content-left position-absolute p-1">$25 of $100</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="container">
-                            <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
-                            <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
-                        <div class="container p-0 progress" style="height: 1.5rem">
-                            <div class="progress-bar progress-bar-striped custom-yellow" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <span class="justify-content-left position-absolute p-1">$25 of $100</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="container">
-                            <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
-                            <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
-                        <div class="container p-0 progress" style="height: 1.5rem">
-                            <div class="progress-bar progress-bar-striped custom-green" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <span class="justify-content-left position-absolute p-1">$25 of $100</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="container">
-                            <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
-                            <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
-                        <div class="container p-0 progress" style="height: 1.5rem">
-                            <div class="progress-bar progress-bar-striped custom-blue" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <span class="justify-content-left position-absolute p-1">$25 of $100</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="container">
-                            <p class="h6 m-0 float-left mt-1 mb-0">Food</p>
-                            <p class="m-0 float-right text-secondary mt-1 mb-0" style="font-size: .75rem">$75 Remaining</p>
-                        <div class="container p-0 progress" style="height: 1.5rem">
-                            <div class="progress-bar progress-bar-striped custom-purple" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <span class="justify-content-left position-absolute p-1">$25 of $100</span>
-                            </div>
-                        </div>
-                    </div> -->
     
                 <div class="container mt-1">
                     <button class="border-0 transparent" id="addBudget">
@@ -269,8 +214,8 @@ let mainPage = `
                             <thead>
                             <tr>
                                 <th scope="col">Date</th>
-                                <th scope="col">Vendor</th>
                                 <th scope="col">Budget</th>
+                                <th scope="col">Vendor</th>
                                 <th scope="col">Item</th>
                                 <th scope="col">Price</th>
                             </tr>
@@ -335,20 +280,20 @@ function handleLoggedStatus(data){
 function createBudget(options) {
         console.log('initial options', options);
 
-        if(!options){
-            options = {
-            margin: 'mt-1',
-            budgetName: null,
-            budgetAmount: null,
-            budgetSpent: null,
-            budgetRemaining: null,
-            ariaValueNow: null,
-            ariaValueMax: null,
-            width: null
-            };
-        }
+        // if(!options){
+        //     options = {
+        //     margin: 'mt-1',
+        //     budgetName: null,
+        //     budgetAmount: null,
+        //     budgetSpent: null,
+        //     budgetRemaining: null,
+        //     ariaValueNow: null,
+        //     ariaValueMax: null,
+        //     width: null
+        //     };
+        // }
 
-        console.log('new options', options);
+        // console.log('new options', options);
 
         if(initialCheck.budget){
             options.margin = 'mt-3'
@@ -356,39 +301,50 @@ function createBudget(options) {
             initialCheck.budget = false;
         }
 
-        options.budgetName = $("input.budget[name=budgetName]").val();
-        options.budgetAmount = $("input.budget[name=budgetAmount]").val();
-        options.budgetSpent = 25;
-        options.budgetRemaining = options.budgetAmount - options.budgetSpent;
-        options.ariaValueNow = 25;
-        options.ariaValueMax = 100;
-        options.width = options.ariaValueNow / options.ariaValueMax * 100;
+        // options.budgetName = $("input.budget[name=budgetName]").val();
+        // options.budgetAmount = $("input.budget[name=budgetAmount]").val();
+        // options.budgetSpent = 0;
+        // options.budgetRemaining = options.budgetAmount - options.budgetSpent;
+        // options.ariaValueNow = 0;
+        // options.ariaValueMax = 100;
+        // options.width = options.ariaValueNow / options.ariaValueMax * 100;
 
-        console.log('updated options', options);
+        // console.log('updated options', options);
 
-        let budget = `
-            <div class="container">
-                <p class="h6 m-0 float-left ${options.margin} mb-0">${options.budgetName}</p>
-                <p class="m-0 float-right text-secondary ${options.margin} mb-0" style="font-size: .75rem">$${options.budgetRemaining} Remaining</p>
-                <div class="container p-0 progress" style="height: 1.5rem">
-                    <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: ${options.width}%" aria-valuenow="${options.ariaValueNow}" aria-valuemin="20" aria-valuemax="${options.ariaValueMax}">
-                        <span class="justify-content-left position-absolute p-1">$${options.budgetSpent} of $${options.budgetAmount}</span>
-                    </div>
-                </div>
-            </div>`;
+        // let budget = `
+        //     <div class="container">
+        //         <p class="h6 m-0 float-left ${options.margin} mb-0">${options.budgetName}</p>
+        //         <p class="m-0 float-right text-secondary ${options.margin} mb-0" style="font-size: .75rem">$${options.budgetRemaining} Remaining</p>
+        //         <div class="container p-0 progress" style="height: 1.5rem">
+        //             <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: ${options.width}%" aria-valuenow="${options.ariaValueNow}" aria-valuemin="20" aria-valuemax="${options.ariaValueMax}">
+        //                 <span class="justify-content-left position-absolute p-1">$${options.budgetSpent} of $${options.budgetAmount}</span>
+        //             </div>
+        //         </div>
+        //     </div>`;
 
-        console.log('budget html: ', budget);
+        // console.log('budget html: ', budget);
 
-        $('div.budgetSection').append(budget);
-
+        // $('div.budgetSection').append(budget);
 
         initialCheck.budgetBarCount++;
+        
+
+        $.ajax({
+            url: 'http://localhost:3050/submitBudget',
+            cache: false,
+            data: {
+                budget: options.budgetAmount,
+                amount: options.budgetAmount,
+                username: initialCheck.currentUser
+            },
+            method: 'post',
+            dataType: 'json'
+        }).then(getData)
     
     $('#createBudgetModal').modal('hide');
-    budgetObject.labels.push(options.budgetName);
-    budgetObject.values.push(options.budgetAmount);
+    // budgetObject.labels.push(options.budgetName);
+    // budgetObject.values.push(options.budgetAmount);
 
-    createDoughnutChart(budgetObject);
 }
 
 /***************************************************************************************************
@@ -421,8 +377,6 @@ function createExpense(options) {
 
     options.price = $("input.expense[name=price]").val();
     console.log('options.price', options.price);
- 
-console.log('options: ', options);
 
 $.ajax({
     url: 'http://localhost:3050/submitExpense',
@@ -435,14 +389,21 @@ $.ajax({
         username: initialCheck.currentUser,
         budget: options.budget
     },
+    success: () => {
+        console.log('expense submitted successfully')
+    },
+    error: ()=> {
+        console.log('expense failed to submit')
+    },
     method: 'post',
     dataType: 'json'
-});
-         console.log('updated options', options);
-         var optionsArray = [];
-         optionsArray.push(options);
+}).then(getData);
 
-         loadExpense(optionsArray);
+        //  console.log('updated options', options);
+        //  const optionsArray = [];
+        //  optionsArray.push(options);
+
+        //  loadExpense(optionsArray);
      $('#createExpenseModal').modal('hide');
  }
 
@@ -458,8 +419,8 @@ function loadExpense(expenseArray){
         let expense = `
             <tr>
                 <td>${expenseArray[i].date}</td>
-                <td>${expenseArray[i].vendor}</td>
                 <td>${expenseArray[i].budget}</td>
+                <td>${expenseArray[i].vendor}</td>
                 <td>${expenseArray[i].item}</td>
                 <td>${expenseArray[i].price}</td>
             </tr>
@@ -480,7 +441,7 @@ function loadExpense(expenseArray){
 //function gets all budget and expense data related to the current user
 
 function getData(){
-
+    console.log('getData called');
     $.ajax({
         url: 'http://localhost:3050/getData',
         cache: false,
@@ -488,6 +449,105 @@ function getData(){
             username: initialCheck.currentUser
         },
         method: 'post',
-        dataType: 'json'
+        dataType: 'json',
+        success: function (response){
+            console.log('get data responseData: ', response);
+        },
+        error: function(xhr){
+            console.log('error');
+        }
+    }).then(function (data){
+        loadData(data)
     });
+}
+
+/***************************************************************************************************
+ * Load Data to page
+ */
+//function display budget and expense in their sections after the data is obtained
+function loadData(dataArray) {
+    console.log('load data called');
+    console.log('budget Array running', dataArray);
+    if(dataArray){
+        const options = {};
+        const budgetList = {};
+        budgetObject.labels = [];
+        budgetObject.values = [];
+
+        $('div.budgetSection').empty();
+        $('tbody.expenseSection').empty();
+        $('.initial-budget').empty();
+
+        for(let i = 0; i < dataArray.length; i++){
+            console.log('budgetObj: ', budgetObject);
+            console.log('index: ', i);
+            if(i === 0){
+                options['margin'] = 'mt-3'
+            } else {
+                options['margin'] = 'mt-1'
+            };
+    
+            let budgetName = dataArray[i]['budget'];
+            console.log('budget name: ', budgetName);
+            let budgetAmount = dataArray[i]['amount'];
+            let budgetRemaining= dataArray[i]['remaining'];
+            let dateValue = new Date(dataArray[i]['date']);
+            let dateObject = {};
+            if(parseInt(dateValue.getDate()) < 10){
+                dateObject['day'] = "0"+ dateValue.getDate();
+            } else {
+                dateObject['day'] = dateValue.getDate();
+            };
+
+            dateObject['month'] = dateValue.getMonth();
+            dateObject['year'] = dateValue.getFullYear();
+
+            
+            let date = dateObject['month'] + '\/' + dateObject['day'] + '\/' + dateObject['year']; 
+            let item = dataArray[i]['item'];
+            let price = dataArray[i]['price'];
+            let vendor = dataArray[i]['vendor'];
+            let budgetSpent = budgetAmount - budgetRemaining;
+            let ariaNow = Math.floor(budgetSpent/budgetAmount * 100);
+            
+            if(ariaNow > budgetAmount){
+                options['width'] = budgetAmount;
+            } else {options['width'] = ariaNow};
+
+            let budget = `
+            <div class="container">
+                <p class="h6 m-0 float-left ${options.margin} mb-0">${budgetName}</p>
+                <p class="m-0 float-right text-secondary ${options.margin} mb-0" style="font-size: .75rem">$${budgetRemaining} Remaining</p>
+                <div class="container p-0 progress" style="height: 1.5rem">
+                    <div class="progress-bar progress-bar-striped custom-red" role="progressbar" style="width: ${options.width}%" aria-valuenow="${options.width}" aria-valuemin="0" aria-valuemax="${budgetAmount}">
+                        <span class="justify-content-left position-absolute p-1">$${budgetSpent} of $${budgetAmount}</span>
+                    </div>
+                </div>
+            </div>`;
+    
+            if(!budgetList[budgetName]){
+                console.log('before: ',i, " ", budgetList['budgetName']);
+                budgetObject.labels[i] = budgetName;
+                budgetObject.values[i] = budgetAmount;
+                budgetList[budgetName] = true;
+                console.log('after: ',i, " ", budgetList['budgetName']);
+                $('div.budgetSection').append(budget);
+            }
+            
+            initialCheck.budgetBarCount++;
+            let expense = `
+            <tr>
+                <td>${date}</td>
+                <td>${budgetName}</td>
+                <td>${vendor}</td>
+                <td>${item}</td>
+                <td>${price}</td>
+            </tr>`;
+
+            $('tbody.expenseSection').append(expense);
+            initialCheck.expenseRowCount++;
+    }
+    }
+    createDoughnutChart(budgetObject);
+    console.log('budgetOptions: ', budgetObject);
 }
