@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 
+
 module.exports = (app, database) => {
     console.log('connected to trackexpense');
 
@@ -61,58 +62,39 @@ module.exports = (app, database) => {
         })
 
         //Build query for budget
-        updateAllBudgets(username);
+        return response.send(JSON.stringify(updateAllBudgets(username,getData)));
     });
 
     //Endpoint to get data for budget and expenses for a specific user
-    app.post('/getData', async (request, response)=>{
+    app.post('/getData', (request, response)=>{
         const username = request.body.username;
-        await updateAllBudgets(username);
-        getData();
-    //Get budget Section
 
-    function getData(){
-        const getBudgetQuery = `SELECT b.name AS budget, b.amount, b.remaining, e.date, e.vendor, e.item, e.price
-                             FROM budget AS b 
-                             JOIN budget_expense AS be 
-                             ON b.ID = be.budget_id
-                             JOIN expense AS e
-                             ON e.ID = be.expense_id
-                             JOIN user AS u 
-                             ON u.ID = be.user_id 
-                             WHERE u.username = ?`;
-                             
-        const getBudgetInserts = [username];
-        const getBudgetSql = mysql.format(getBudgetQuery,getBudgetInserts);
 
-        database.query(getBudgetSql, (error, data, field) => {
-            if(!error){
-                const displayData = [];
-                for(let i = 0; i < data.length; i++){
-                    const rowData = {};
-                    rowData['budget'] = data[i]['budget'];
-                    rowData['amount'] = data[i]['amount'];
-                    rowData['remaining'] = data[i]['remaining'];
-                    rowData['date'] = data[i]['date'];
-                    rowData['vendor'] = data[i]['vendor'];
-                    rowData['item'] = data[i]['item'];
-                    rowData['price'] = data[i]['price'];
-                   if(rowData){
-                       displayData.push(rowData);
-                   }
-                }
-                console.log('Budget successfully fetched.');
-                console.log(displayData);
-                response.send(JSON.stringify(displayData));
-            } else {
-                console.log('Budget failed to fetch');
-            }
-        })
-    };
-    })
+        return response.send(JSON.stringify(updateAllBudgets(username,getData)));
 
+    //     function updatePromise(username){ 
+    //         console.log('promise running');
+    //         return new Promise( (resolve, reject) => {
+    //             console.log('username sol: ', username);
+    //             console.log('getData sol: ', getData);
+    //             let displayData = updateAllBudgets(username, getData);
+    //             resolve(displayData);
+    //     });
+    // }
+
+    
+    // updatePromise(username)
+    
+    // .then((response)=>{
+    //     console.log("solution: ", response);
+    // });
+
+    // return response.send(JSON.stringify(updatePromise(username)));
+    });
+
+
+    //Endpoint to submit an expense
     app.post('/submitExpense', (request, response)=>{
-        response.send('Thank you for submitting an expense');
 
         const date = String(request.body.date);
         console.log('date: ', date);
@@ -174,7 +156,7 @@ module.exports = (app, database) => {
             database.query(budgetExpenseSql, (error, data, fields) => {
                 if(!error){
                     console.log('Successfully submited to budget_expense table.');
-                    updateAllBudgets(username);
+                    return updateAllBudgets(username, getData);
                 } else {
                     console.log('Failed to submit to budget_expense table.', error);
                 }
@@ -187,8 +169,15 @@ module.exports = (app, database) => {
                 setTimeout(getIDs,1000);
             }
         };
+ 
+    //     function getIDPromise(){ 
+    //         return new Promise( (resolve, reject) => {
+    //         getIDs();
+    //         resolve('getIDs complete. Thank you for submitting an expense.');
+    //     });
+    // }
 
-        getIDs();
+        return response.send(JSON.stringify(getIDs()));
 });
 
 
@@ -277,7 +266,7 @@ function getBudgetID(budget){
         return budgetObj;
 }
 
-function updateAllBudgets(username){
+function updateAllBudgets(username, getData){
     const updateBudgetQuery = `SELECT bu.budget_id
                                FROM budget_user AS bu
                                JOIN user AS u
@@ -292,6 +281,8 @@ function updateAllBudgets(username){
                 console.log('looping budgetID: ', data[i]);
                 updateBudgetAmount(data[i]['budget_id']);
             }
+            console.log('update budget complete');
+            return getData(username);
         } else {
             console.log('Failed to update budgets');
         }
@@ -299,6 +290,45 @@ function updateAllBudgets(username){
 }
 
 
+function getData(username){
+    console.log('get data running');
+    const getBudgetQuery = `SELECT b.name AS budget, b.amount, b.remaining, e.date, e.vendor, e.item, e.price
+                         FROM budget AS b 
+                         JOIN budget_expense AS be 
+                         ON b.ID = be.budget_id
+                         JOIN expense AS e
+                         ON e.ID = be.expense_id
+                         JOIN user AS u 
+                         ON u.ID = be.user_id 
+                         WHERE u.username = ?`;
+                         
+    const getBudgetInserts = [username];
+    const getBudgetSql = mysql.format(getBudgetQuery,getBudgetInserts);
 
+    database.query(getBudgetSql, (error, data, field) => {
+        if(!error){
+            const displayData = [];
+            for(let i = 0; i < data.length; i++){
+                const rowData = {};
+                rowData['budget'] = data[i]['budget'];
+                rowData['amount'] = data[i]['amount'];
+                rowData['remaining'] = data[i]['remaining'];
+                rowData['date'] = data[i]['date'];
+                rowData['vendor'] = data[i]['vendor'];
+                rowData['item'] = data[i]['item'];
+                rowData['price'] = data[i]['price'];
+               if(rowData){
+                   displayData.push(rowData);
+               }
+            }
+            console.log('Budget successfully fetched.');
+            console.log('display data: ', displayData);
+            console.log('get data complete');
+            return displayData;
+        } else {
+            console.log('Budget failed to fetch');
+        }
+    })
+};
 
 }
