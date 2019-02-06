@@ -1,9 +1,9 @@
 const mysql = require('mysql');
-
+var Promise = require('promise');
 
 module.exports = (app, database) => {
     console.log('connected to trackexpense');
-
+    const statusObject = {};
     //Endpoint to submit a budget
     app.post('/submitBudget', (request, response)=>{
         const username = request.body.username;
@@ -60,17 +60,15 @@ module.exports = (app, database) => {
                 })
             }
         })
-
-        //Build query for budget
-        return response.send(JSON.stringify(updateAllBudgets(username,getData)));
+        return updateAllBudgets(username);
     });
 
     //Endpoint to get data for budget and expenses for a specific user
     app.post('/getData', (request, response)=>{
         const username = request.body.username;
+        updateAllBudgets(username);
 
-
-        return response.send(JSON.stringify(updateAllBudgets(username,getData)));
+        return updateAllBudgets(username);
 
     //     function updatePromise(username){ 
     //         console.log('promise running');
@@ -156,7 +154,7 @@ module.exports = (app, database) => {
             database.query(budgetExpenseSql, (error, data, fields) => {
                 if(!error){
                     console.log('Successfully submited to budget_expense table.');
-                    return updateAllBudgets(username, getData);
+                    return updateAllBudgets(username);
                 } else {
                     console.log('Failed to submit to budget_expense table.', error);
                 }
@@ -220,6 +218,11 @@ function updateBudgetAmount(budgetID){
                     database.query(updateBudgetSql, (error, data, fields)=>{
                         if(!error){
                             console.log('Budget remaining amount successfully updated.')
+
+                            if(!statusObject[budgetID]){
+                                statusObject['budgetID'] = true;
+                            }
+
                         } else {
                             console.log('Budget failed to update.')
                         }
@@ -266,7 +269,9 @@ function getBudgetID(budget){
         return budgetObj;
 }
 
-function updateAllBudgets(username, getData){
+function updateAllBudgets(username){
+    statusObject['completed'] = [];
+    const dataLength = {length: null};
     const updateBudgetQuery = `SELECT bu.budget_id
                                FROM budget_user AS bu
                                JOIN user AS u
@@ -277,16 +282,17 @@ function updateAllBudgets(username, getData){
 
     database.query(updateBudgetSql, (error, data, fields)=>{
         if(!error && data.length){
+            dataLength['length'] = data.length;
+            console.log('post query length: ', dataLength['length']);
             for(let i = 0; i < data.length; i++){
                 console.log('looping budgetID: ', data[i]);
                 updateBudgetAmount(data[i]['budget_id']);
             }
-            console.log('update budget complete');
-            return getData(username);
-        } else {
+        }else {
             console.log('Failed to update budgets');
         }
     })
+    checkStatus(dataLength['length']);
 }
 
 
@@ -322,7 +328,7 @@ function getData(username){
                }
             }
             console.log('Budget successfully fetched.');
-            console.log('display data: ', displayData);
+            // console.log('display data: ', displayData);
             console.log('get data complete');
             return displayData;
         } else {
@@ -330,5 +336,17 @@ function getData(username){
         }
     })
 };
+
+function checkStatus(length){
+    console.log('current length: ', length);
+    console.log('status Object: ', statusObject['completed']);
+    console.log('status Object length: ', statusObject['completed'].length);
+    if(statusObject['completed'].length == length){
+        return response.send(JSON.stringify(getData()));
+    } else {
+        setTimeout(checkStatus,1000);
+    }
+}
+
 
 }

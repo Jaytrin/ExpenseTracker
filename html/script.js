@@ -456,8 +456,10 @@ function getData(){
         success: function (response){
             console.log('get data responseData: ', response);
         },
-        error: function(xhr){
-            console.log('error');
+        error: (xhr, status, error)=> {
+            console.log('xhr: ', xhr);
+            console.log('status: ', status);
+            console.log('error: ', error);
         }
     }).then((response)=>{
         debugger;
