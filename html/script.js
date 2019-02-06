@@ -392,8 +392,10 @@ $.ajax({
     success: () => {
         console.log('expense submitted successfully')
     },
-    error: ()=> {
-        console.log('expense failed to submit')
+    error: (xhr, status, error)=> {
+        console.log('xhr: ', xhr);
+        console.log('status: ', status);
+        console.log('error: ', error);
     },
     method: 'post',
     dataType: 'json'
@@ -441,6 +443,7 @@ function loadExpense(expenseArray){
 //function gets all budget and expense data related to the current user
 
 function getData(){
+    // debugger;
     console.log('getData called');
     $.ajax({
         url: 'http://localhost:3050/getData',
@@ -456,8 +459,9 @@ function getData(){
         error: function(xhr){
             console.log('error');
         }
-    }).then(function (data){
-        loadData(data)
+    }).then((response)=>{
+        debugger;
+        loadData(response);
     });
 }
 
@@ -466,6 +470,7 @@ function getData(){
  */
 //function display budget and expense in their sections after the data is obtained
 function loadData(dataArray) {
+    debugger;
     console.log('load data called');
     console.log('budget Array running', dataArray);
     if(dataArray){
@@ -478,7 +483,7 @@ function loadData(dataArray) {
         $('tbody.expenseSection').empty();
         $('.initial-budget').empty();
 
-        for(let i = 0; i < dataArray.length; i++){
+        for(let i = 0, u = 0; i < dataArray.length; i++){
             console.log('budgetObj: ', budgetObject);
             console.log('index: ', i);
             if(i === 0){
@@ -526,11 +531,12 @@ function loadData(dataArray) {
             </div>`;
     
             if(!budgetList[budgetName]){
-                console.log('before: ',i, " ", budgetList['budgetName']);
-                budgetObject.labels[i] = budgetName;
-                budgetObject.values[i] = budgetAmount;
+                console.log('before: ',u, " ", budgetList['budgetName']);
+                budgetObject.labels[u] = budgetName;
+                budgetObject.values[u] = budgetAmount;
                 budgetList[budgetName] = true;
-                console.log('after: ',i, " ", budgetList['budgetName']);
+                console.log('after: ',u, " ", budgetList['budgetName']);
+                u++;
                 $('div.budgetSection').append(budget);
             }
             
